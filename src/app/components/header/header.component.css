@@ -5,4 +5,14 @@
 .bg-dark {
   background-color: rgb(76 18 20) !important;
 }
+.es-navbar{
+  border-radius: 15px;
+}
+.nav-link {
+  text-decoration: none;
+}
 
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
