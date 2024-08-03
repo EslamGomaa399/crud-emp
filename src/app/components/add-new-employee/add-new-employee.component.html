@@ -1,101 +1,115 @@
-
 <h4>Add New Employee</h4>
 
-<form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
-  <div class="grid">
-    <div class="col">
-      <div class="flex flex-column gap-2">
-        <input
-          pInputText
-          id="firstName"
-          formControlName="firstName"
-          placeholder="First Name"
-          aria-describedby="firstName-help"/>
-        <small id="firstName-help" class="p-error" *ngIf="employeeForm.get('firstName').touched && employeeForm.get('firstName').hasError('required')">
-          * First name is a required field.
-        </small>
+<form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()" style="display: flex;">
+  <!-- Left side with 50% width -->
+  <div style="flex: 1;">
+    <div class="grid">
+      <div class="col-6">
+        <div class="flex flex-column gap-2">
+          <label for="firstName">First Name</label>
+          <input
+            pInputText
+            id="firstName"
+            formControlName="firstName"
+            placeholder="Enter first name"
+            aria-describedby="firstName-help"/>
+          <small id="firstName-help" class="p-error" *ngIf="employeeForm.get('firstName').touched && employeeForm.get('firstName').hasError('required')">
+            * First name is a required field.
+          </small>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="flex flex-column gap-2">
+          <label for="lastName">Last Name</label>
+          <input
+            pInputText
+            id="lastName"
+            formControlName="lastName"
+            placeholder="Enter last name"
+            aria-describedby="lastName-help"/>
+          <small id="lastName-help" class="p-error" *ngIf="employeeForm.get('lastName').touched && employeeForm.get('lastName').errors?.['required']">
+            * Last name is a required field.
+          </small>
+        </div>
       </div>
     </div>
-    <div class="col">
-      <div class="flex flex-column gap-2">
-        <input
-          pInputText
-          id="lastName"
-          formControlName="lastName"
-          placeholder="Last Name"
-          aria-describedby="lastName-help"/>
-        <small id="lastName-help" class="p-error" *ngIf="employeeForm.get('lastName').touched && employeeForm.get('lastName').errors?.['required']">
-          * Last name is a required field.
-        </small>
+
+    <div class="grid">
+      <div class="col">
+        <div class="flex flex-column gap-2">
+          <label for="email">Email</label>
+          <input
+            pInputText
+            id="email"
+            formControlName="email"
+            placeholder="Enter email"
+            aria-describedby="email-help"/>
+          <small id="email-help1" class="p-error" *ngIf="employeeForm.get('email').touched && employeeForm.get('email').errors?.['required']">
+            * Email is a required field.
+          </small>
+          <small id="email-help2" class="p-error" *ngIf="employeeForm.get('email').touched && employeeForm.get('email').errors?.['email']">
+            * Email must be a valid email address.
+          </small>
+        </div>
       </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-6">
+        <div class="es-dropdown-job flex flex-column gap-2">
+          <label for="job">Job Title</label>
+          <p-dropdown
+            id="job"
+            placeholder="job title"
+            formControlName="job"
+            [options]="jobOptions"
+            optionLabel="name">
+          </p-dropdown>
+          <small id="job-help" class="p-error"
+                 *ngIf="employeeForm.get('job').touched && employeeForm.get('job').errors?.['required']">
+            * Job is a required field.
+          </small>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="es-dropdown-dept flex flex-column gap-2">
+          <label for="department">Department</label>
+          <p-dropdown
+            id="department"
+            placeholder="department"
+            formControlName="department"
+            [options]="departmentOptions"
+            optionLabel="name">
+          </p-dropdown>
+          <small id="department-help" class="p-error" *ngIf="employeeForm.get('department').touched && employeeForm.get('department').errors?.['required']">
+            * Department is a required field.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container mt-5"
+         style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
+      <p-button
+        size="small"
+        label="Reset"
+        severity="warning">
+      </p-button>
+
+      <p-button
+        size="small"
+        label="Save"
+        severity="success"
+        type="submit">
+      </p-button>
     </div>
   </div>
 
-  <div class="grid">
-    <div class="col">
-      <div class="flex flex-column gap-2">
-        <input
-          pInputText
-          id="email"
-          formControlName="email"
-          placeholder="Email"
-          aria-describedby="email-help"/>
-        <small id="email-help1" class="p-error" *ngIf="employeeForm.get('email').touched && employeeForm.get('email').errors?.['required']">
-          * Email is a required field.
-        </small>
-        <small id="email-help2" class="p-error" *ngIf="employeeForm.get('email').touched && employeeForm.get('email').errors?.['email']">
-          * Email must be a valid email address.
-        </small>
-      </div>
-    </div>
-    <div class="col">
-      <div class="es-dropdown-job flex flex-column gap-2">
-        <p-dropdown
-          id="job"
-          formControlName="job"
-          [options]="jobOptions"
-          optionLabel="name"
-          placeholder="Select a Job Title">
-        </p-dropdown>
-        <small id="job-help" class="p-error"
-               *ngIf="employeeForm.get('job').touched && employeeForm.get('job').errors?.['required']">
-          * Job is a required field.
-        </small>
-      </div>
-    </div>
+  <div style="width: 1px; background-color: #ccc; margin: 0 10px;"></div>
+
+  <!-- Right side with 50% width -->
+  <div style="flex: 1;">
+    <!-- Content for the right side can be added here -->
+    <h5>Hello World .. </h5>
   </div>
-
-  <div class="grid">
-    <div class="col">
-      <div class="es-dropdown-dept flex flex-column gap-2">
-        <p-dropdown
-          id="department"
-          formControlName="department"
-          [options]="departmentOptions"
-          optionLabel="name"
-          placeholder="Select a Department">
-        </p-dropdown>
-        <small id="department-help" class="p-error" *ngIf="employeeForm.get('department').touched && employeeForm.get('department').errors?.['required']">
-          * Department is a required field.
-        </small>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="button-container" style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem;">
-    <p-button
-      size="small"
-      label="Cancel"
-      severity="warning">
-    </p-button>
-
-    <p-button
-      size="small"
-      label="Save"
-      severity="success"
-      type="submit">
-    </p-button>
-  </div>
-
 </form>
