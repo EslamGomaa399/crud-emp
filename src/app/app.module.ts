@@ -23,6 +23,8 @@ import {LoginComponent} from "./components/login/login.component";
 import {AddNewEmployeeComponent} from "./components/add-new-employee/add-new-employee.component";
 import {AddNewEmployeeModule} from "./components/add-new-employee/add-new-employee.module";
 import {EmployeeDetailsComponent} from "./components/employee-details/employee-details.component";
+import { CountryDropdownComponent } from './shared/country-dropdown/country-dropdown.component';
+import {DropdownModule} from "primeng/dropdown";
 
 const routes:Routes = [
   ({path: 'home', component:HomeComponent}),
@@ -61,6 +63,8 @@ const routes:Routes = [
     RouterLink,
     AddNewEmployeeModule,
     RouterModule.forRoot(routes),
+    DropdownModule,
+    CountryDropdownComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

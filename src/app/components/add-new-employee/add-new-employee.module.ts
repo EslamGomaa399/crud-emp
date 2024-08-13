@@ -7,20 +7,24 @@ import {Button} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
+import {CountryDropdownComponent} from "../../shared/country-dropdown/country-dropdown.component";
+import {CalendarModule} from "primeng/calendar";
 
 
 @NgModule({
   declarations: [
     AddNewEmployeeComponent
   ],
-  imports: [
-    CommonModule,
-    AddNewEmployeeRoutingModule,
-    Button,
-    DropdownModule,
-    FormsModule,
-    InputTextModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        AddNewEmployeeRoutingModule,
+        Button,
+        DropdownModule,
+        FormsModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        CountryDropdownComponent,
+        CalendarModule
+    ]
 })
 export class AddNewEmployeeModule { }
