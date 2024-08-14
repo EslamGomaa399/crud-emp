@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EmployeeService} from "../../services/employee.service";
 import {CustomService} from "../../services/custom.service";
 import {Department, Job} from "../../models/department";
+import {COUNTRIES_CITIES} from "../../shared/countries-cities";
+import {Employee} from "../../models/employee";
 
 
 
@@ -16,16 +18,18 @@ export class AddNewEmployeeComponent implements OnInit {
   employees: Array<any> = [];
   jobOptions: Array<string> = [];
   departmentOptions: Array<string> = [];
-
+  managersOptions :Array<string> = [];
+  countriesOptions: Array<{ name: string, cities: string[] }> = COUNTRIES_CITIES.countries;
+  citiesOptions: string[] = [];
+  selectedCountry: any;
+  selectedCity: any;
   value: any;
   employeeForm: FormGroup | any;
-  cities: any;
 
-  selectedCity: any;
+
   date1: Date | undefined;
 
-  selectedManager: string | undefined;
-  managers = [];
+
 
   constructor(private fb: FormBuilder,
               private _employeeService:EmployeeService,
@@ -37,6 +41,8 @@ export class AddNewEmployeeComponent implements OnInit {
 
     this.getDepartments();
     this.getJobs();
+    this.getAllManagersNames();
+
 
     this.employeeForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -46,7 +52,7 @@ export class AddNewEmployeeComponent implements OnInit {
       departmentName: ['', Validators.required],
       managerName: ['', Validators.required],
       country: ['', Validators.required],
-      city: ['', Validators.required],
+      city: [{ value: '', disabled: true }, Validators.required], // Disable initially
       street: ['', Validators.required],
       postalCode: ['', Validators.required],
       phoneNumber: ['', Validators.required],
@@ -58,16 +64,46 @@ export class AddNewEmployeeComponent implements OnInit {
 
   }
 
-  saveEmployee() {
 
+  saveEmployee() {
     if (this.employeeForm.valid) {
-      // Optionally, you might want to clear the form after saving
-      this.employeeForm.reset();
-      this.employeeForm.markAsPristine();
-      this.employeeForm.markAsUntouched();
+      const formValue = this.employeeForm.value;
+      const employee: Employee = {
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
+        email: formValue.email,
+        phoneNumber: formValue.phoneNumber,
+        hireDate: formValue.hireDate,
+        jobTitle: formValue.jobTitle,
+        salary: Number(formValue.salary), // Ensure salary is a number
+        managerName: formValue.managerName,
+        departmentName: formValue.departmentName,
+        country: formValue.country,
+        city: formValue.city,
+        street: formValue.street,
+        postalCode: formValue.postalCode
+      };
+
+      this.customService.addNewEmployee(employee).subscribe({
+        next: (response) => {
+          console.log('Employee saved successfully', response);
+          // Clear the form after saving
+          this.resetForm();
+        },
+        error: (error) => {
+          console.error('Error saving employee', error);
+          // Handle error (e.g., show error message to user)
+        },
+        complete: () => {
+          console.log('Employee save operation completed');
+        }
+      });
     } else {
-      // If the form is invalid, mark all controls as touched
-      this.employeeForm.markAllAsTouched();
+      // If the form is invalid, mark all controls as touched to show validation errors
+      Object.keys(this.employeeForm.controls).forEach(key => {
+        const control = this.employeeForm.get(key);
+        control.markAsTouched();
+      });
     }
   }
 
@@ -80,7 +116,7 @@ export class AddNewEmployeeComponent implements OnInit {
     this.customService.getDepartments().subscribe({
       next: (departments: Department[]) => {
         this.departmentOptions = departments.map((dept) => dept.departmentName);
-        console.log(this.departmentOptions);
+        console.log("departmentOptions : " + this.departmentOptions);
       },
       error: (error) => {
         console.error('Error fetching departments', error);
@@ -96,7 +132,7 @@ export class AddNewEmployeeComponent implements OnInit {
     this.customService.getJobs().subscribe({
       next: (jobs:Job[]) => {
         this.jobOptions = jobs.map((job) => job.jobTitle);
-        console.log(this.jobOptions);
+        console.log("jobOptions : " + this.jobOptions);
       },
       error: (error) => {
         console.error('Error fetching jobs', error);
@@ -107,8 +143,39 @@ export class AddNewEmployeeComponent implements OnInit {
     })
   }
 
+  getAllManagersNames(){
+    this.customService.getAllManagersNames().subscribe({
+      next: (managers:string[]) => {
+        this.managersOptions = managers;
+        console.log("managersOptions : " + this.managersOptions)
+      },
+      error: (error) => {
+        console.error('Error fetching managers', error);
+      },
+      complete: () => {
+        console.log('Managers fetching completed');
+      }
+    })
+  }
 
 
+  onCountryChange(selectedCountry: { name: string, cities: string[] }): void {
+    console.log("Selected Country: ", selectedCountry);
+
+    this.citiesOptions = selectedCountry ? selectedCountry.cities : [];
+
+    console.log("Cities for selected country: ", this.citiesOptions);
+
+    // Enable or disable the city dropdown based on whether a country is selected
+    if (this.citiesOptions.length > 0) {
+      this.employeeForm.get('city').enable();
+    } else {
+      this.employeeForm.get('city').disable();
+    }
+
+    // Reset the city selection
+    this.employeeForm.get('city').reset();
+  }
 
 
 
