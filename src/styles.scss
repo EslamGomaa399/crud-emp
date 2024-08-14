@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #d5d4d4; /* Replace with your desired color */
+  background-color: #efefef; /* Replace with your desired color */
   margin: 0; /* Optional: Remove default margin */
   padding: 0; /* Optional: Remove default padding */
   height: 100%; /* Optional: Ensure the body takes up full height */
@@ -15,3 +15,7 @@ body {
 #job, #departmentName, #city, #countries,#managerName{
   width: 100% !important;
 }
+.emp-hover{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+

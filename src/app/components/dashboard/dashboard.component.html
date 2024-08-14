@@ -1,42 +1,50 @@
-<div class="mb-3">
-  <p-button
-    size="small"
-    label="Add New Employee"
-    [rounded]="true"
-    severity="help"
-    (click)="onClickAddNewEmployee()"
-    icon="pi pi-user-plus">
-  </p-button>
+
+
+
+<div class="emp-hover">
+  <div class="m-3 pt-3">
+    <p-button
+      size="small"
+      label="Add New Employee"
+      [rounded]="true"
+      severity="help"
+      (click)="onClickAddNewEmployee()"
+      icon="pi pi-user-plus">
+    </p-button>
+  </div>
+  <div >
+    <p-table
+      [value]="employees"
+      [resizableColumns]="true"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pResizableColumn>Name</th>
+          <th pResizableColumn>Job</th>
+          <th pResizableColumn>Department</th>
+          <th pResizableColumn>Email</th>
+          <th pResizableColumn>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-employee>
+        <tr>
+          <td>
+            <a class="p-card" routerLink="/employee-details" routerLinkActive="active">
+              {{employee.firstName}} {{employee.lastName}}
+            </a>
+          </td>
+          <td>{{employee.jobTitle}}</td>
+          <td>{{employee.departmentName}}</td>
+          <td>{{employee.email}}</td>
+          <td>
+            <p-button routerLink="/employee-details" class="mx-1" icon="pi pi-user-edit" [rounded]="true" severity="info" [outlined]="true" />
+            <p-button class="mx-1" icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
 
-<p-table
-  [value]="employees"
-  [resizableColumns]="true"
-  styleClass="p-datatable-striped"
-  [tableStyle]="{'min-width': '50rem'}">
-  <ng-template pTemplate="header">
-    <tr>
-      <th pResizableColumn>Name</th>
-      <th pResizableColumn>Job</th>
-      <th pResizableColumn>Department</th>
-      <th pResizableColumn>Email</th>
-      <th pResizableColumn>Action</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-employee>
-    <tr>
-      <td>
-        <a class="p-card" routerLink="/employee-details" routerLinkActive="active">
-          {{employee.firstName}} {{employee.lastName}}
-        </a>
-      </td>
-      <td>{{employee.job}}</td>
-      <td>{{employee.department}}</td>
-      <td>{{employee.email}}</td>
-      <td>
-        <p-button class="mx-1" icon="pi pi-user-edit" [rounded]="true" severity="info" [outlined]="true" />
-        <p-button class="mx-1" icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" />
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+

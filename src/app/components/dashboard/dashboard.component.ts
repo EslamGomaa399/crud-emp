@@ -14,6 +14,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {NgIf} from "@angular/common";
 import {DropdownModule} from "primeng/dropdown";
 import {Router} from "@angular/router";
+import {CustomService} from "../../services/custom.service";
+import {Employee} from "../../models/employee";
 
 @Component({
   selector: 'app-dashboard',
@@ -38,13 +40,15 @@ import {Router} from "@angular/router";
   providers: [MessageService, ConfirmationService]
 })
 export class DashboardComponent implements OnInit {
-  employees: Array<any> = [];
+  employees: Employee[] = [];
 
 
   value: any;
   employeeForm: FormGroup | any;
 
-  constructor(private fb: FormBuilder, private _router: Router) {
+  constructor(private fb: FormBuilder,
+              private _customService: CustomService,
+              private _router: Router) {
 
   }
 
@@ -58,23 +62,7 @@ export class DashboardComponent implements OnInit {
       department: ['', [Validators.required]]
     })
 
-    this.employees = [
-      {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@crud.com',
-        job: 'Software Engineer',
-        department: 'Engineering'
-      },
-      {
-        firstName: 'Jane',
-        lastName: 'Smith',
-        email: 'jane.smith@crud.com',
-        job: 'Product Manager',
-        department: 'Management'
-      }
-    ];
-
+    this.getAllEmployees();
 
   }
 
@@ -83,6 +71,21 @@ export class DashboardComponent implements OnInit {
 
   onClickAddNewEmployee() {
     this._router.navigate(['add-new-employee'])
+  }
+
+  getAllEmployees() {
+    this._customService.getAllEmployees().subscribe({
+      next: (data: Employee[]) => {
+        this.employees = data;
+        console.log("Fetched employees:", this.employees);
+      },
+      error: (err) => {
+        console.error("Error occurred while fetching employees:", err);
+      },
+      complete: () => {
+        console.log("Successfully fetched all employees.");
+      }
+    });
   }
 
 

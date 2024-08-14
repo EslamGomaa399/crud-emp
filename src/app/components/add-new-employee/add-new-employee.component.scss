@@ -8,3 +8,23 @@
   align-items: center;
   margin-bottom: 20px;
 }
+.p-card{
+  width: 70%;              /* Allows p-card to adjust based on content */
+  max-width: 800px;         /* Sets a max-width for better responsiveness */
+  padding: 20px;            /* Adds padding inside the card */
+  background-color: white;  /* Ensures the card has a white background */
+  border-radius: 8px;       /* Optional: Rounds the corners of the card */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+}
+.page-container {
+  display: flex;
+  justify-content: center;  /* Horizontally centers the p-card */
+  align-items: center;      /* Vertically centers the p-card */
+  min-height: 100vh;        /* Sets the height to fill the viewport */
+}
+
+form{
+  margin:20px;
+}
+
