@@ -25,6 +25,7 @@ import {AddNewEmployeeModule} from "./components/add-new-employee/add-new-employ
 import {EmployeeDetailsComponent} from "./components/employee-details/employee-details.component";
 import { CountryDropdownComponent } from './shared/country-dropdown/country-dropdown.component';
 import {DropdownModule} from "primeng/dropdown";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 const routes:Routes = [
   ({path: 'home', component:HomeComponent}),
@@ -65,6 +66,7 @@ const routes:Routes = [
     RouterModule.forRoot(routes),
     DropdownModule,
     CountryDropdownComponent,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
