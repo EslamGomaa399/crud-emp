@@ -26,6 +26,9 @@ export class CustomService {
     return this._httpClient.get<string[]>(this.apiUrl + '/managers/names');
   }
 
+  addNewEmployee(employee: Employee): Observable<Employee> {
+    return this._httpClient.post<Employee>(this.apiUrl + '/employees', employee);
+  }
 
   getAllEmployees(): Observable<Employee[]> {
     return this._httpClient.get<Employee[]>(this.apiUrl + '/employees');
