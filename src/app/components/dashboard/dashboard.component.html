@@ -30,7 +30,7 @@
       <ng-template pTemplate="body" let-employee>
         <tr>
           <td>
-            <a class="p-card" routerLink="/employee-details" routerLinkActive="active">
+            <a style="text-decoration: none; font-weight: bold" class="p-card" routerLink="/employee-details" routerLinkActive="active">
               {{employee.firstName}} {{employee.lastName}}
             </a>
           </td>
@@ -38,8 +38,17 @@
           <td>{{employee.departmentName}}</td>
           <td>{{employee.email}}</td>
           <td>
-            <p-button routerLink="/employee-details" class="mx-1" icon="pi pi-user-edit" [rounded]="true" severity="info" [outlined]="true" />
-            <p-button class="mx-1" icon="pi pi-times" [rounded]="true" severity="danger" [outlined]="true" />
+            <p-button routerLink="/employee-details"
+                      class="mx-1"
+                      icon="pi pi-user-edit"
+                      [rounded]="true" severity="info"
+                      [outlined]="true" />
+
+            <p-button class="mx-1"
+                      icon="pi pi-times"
+                      [rounded]="true"
+                      severity="danger"
+                      [outlined]="true" />
           </td>
         </tr>
       </ng-template>

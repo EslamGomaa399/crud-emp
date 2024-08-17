@@ -250,7 +250,7 @@
 
       <div class="mt-5">
         <p-button class="mx-2" size="small" label="Reset" (onClick)="resetForm()" severity="warning"></p-button>
-        <p-button class="mx-2" size="small" label="Save" severity="success" type="submit"></p-button>
+        <p-button [disabled]="employeeForm.invalid" class="mx-2" size="small" label="Save" severity="success" type="submit"></p-button>
       </div>
 
 
