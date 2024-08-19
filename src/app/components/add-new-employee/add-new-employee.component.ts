@@ -15,24 +15,19 @@ import {Employee} from "../../models/employee";
 
 })
 export class AddNewEmployeeComponent implements OnInit {
-  employees: Array<any> = [];
+
   jobOptions: Array<string> = [];
   departmentOptions: Array<string> = [];
   managersOptions :Array<string> = [];
   countriesOptions: Array<{ name: string, cities: string[] }> = COUNTRIES_CITIES.countries;
   citiesOptions: string[] = [];
-  selectedCountry: any;
-  selectedCity: any;
   value: any;
   employeeForm: FormGroup | any;
-
-
   date1: Date | undefined;
 
 
 
   constructor(private fb: FormBuilder,
-              private _employeeService:EmployeeService,
               private customService:CustomService) {
 
   }
@@ -60,16 +55,7 @@ export class AddNewEmployeeComponent implements OnInit {
       salary: ['', Validators.required],
     })
 
-
-
   }
-
-  // saveEmployee(){
-  //   console.log(this.employeeForm)
-  //   const formValue = this.employeeForm.value;
-  //   console.log(formValue)
-  // }
-
 
   saveEmployee() {
 
@@ -85,7 +71,7 @@ export class AddNewEmployeeComponent implements OnInit {
         phoneNumber: formValue.phoneNumber,
         hireDate: formValue.hireDate,
         jobTitle: formValue.jobTitle,
-        salary: Number(formValue.salary), // Ensure salary is a number
+        salary: Number(formValue.salary),
         managerName: formValue.managerName,
         departmentName: formValue.departmentName,
         country: formValue.country.name,
