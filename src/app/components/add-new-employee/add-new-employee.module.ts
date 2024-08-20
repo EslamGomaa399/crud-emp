@@ -9,22 +9,26 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {CountryDropdownComponent} from "../../shared/country-dropdown/country-dropdown.component";
 import {CalendarModule} from "primeng/calendar";
+import {ToastModule} from "primeng/toast";
+import {AppModule} from "../../app.module";
 
 
 @NgModule({
   declarations: [
     AddNewEmployeeComponent
   ],
-    imports: [
-        CommonModule,
-        AddNewEmployeeRoutingModule,
-        Button,
-        DropdownModule,
-        FormsModule,
-        InputTextModule,
-        ReactiveFormsModule,
-        CountryDropdownComponent,
-        CalendarModule
-    ]
+  imports: [
+    CommonModule,
+    AddNewEmployeeRoutingModule,
+    Button,
+    DropdownModule,
+    FormsModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    CountryDropdownComponent,
+    CalendarModule,
+    ToastModule,
+    AppModule
+  ]
 })
 export class AddNewEmployeeModule { }

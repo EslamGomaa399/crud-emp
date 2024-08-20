@@ -26,6 +26,8 @@ import {EmployeeDetailsComponent} from "./components/employee-details/employee-d
 import { CountryDropdownComponent } from './shared/country-dropdown/country-dropdown.component';
 import {DropdownModule} from "primeng/dropdown";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { LoaderComponent } from './shared/loader/loader.component';
+import {NgxUiLoaderConfig, NgxUiLoaderModule} from "ngx-ui-loader";
 
 const routes:Routes = [
   ({path: 'home', component:HomeComponent}),
@@ -35,17 +37,30 @@ const routes:Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'add-new-employee', component:AddNewEmployeeComponent},
   {path: 'employee-details', component:EmployeeDetailsComponent}
-
-
 ]
+
+const ngxUiLoaderConfig:NgxUiLoaderConfig  = {
+  fgsColor: '#007bff', // Spinner color
+  fgsType: 'ball-spin', // Spinner type
+  fgsSize: 80, // Size of the spinner
+  overlayColor: 'rgba(40, 40, 40, 0.8)', // Overlay color
+  pbColor: 'red', // Progress bar color (if enabled)
+  hasProgressBar: true, // Show progress bar
+  text: 'Loading...', // Text to show below spinner
+  textColor: '#FFFFFF',
+}
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     CommonModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -62,13 +77,15 @@ const routes:Routes = [
     AvatarModule,
     RouterOutlet,
     RouterLink,
-    AddNewEmployeeModule,
     RouterModule.forRoot(routes),
     DropdownModule,
     CountryDropdownComponent,
     HttpClientModule
   ],
   providers: [],
+  exports: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

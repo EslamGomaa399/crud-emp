@@ -33,7 +33,9 @@ export class CustomService {
   getAllEmployees(): Observable<Employee[]> {
     return this._httpClient.get<Employee[]>(this.apiUrl + '/employees');
   }
-
+  deleteEmployee(id:number): Observable<any> {
+    return this._httpClient.get<any>(this.apiUrl + `/employees/delete/${id}`);
+  }
 
 
 

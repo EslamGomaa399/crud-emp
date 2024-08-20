@@ -5,6 +5,9 @@ import {CustomService} from "../../services/custom.service";
 import {Department, Job} from "../../models/department";
 import {COUNTRIES_CITIES} from "../../shared/countries-cities";
 import {Employee} from "../../models/employee";
+import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 
 
@@ -12,6 +15,7 @@ import {Employee} from "../../models/employee";
   selector: 'app-add-new-employee',
   templateUrl: './add-new-employee.component.html',
   styleUrl: './add-new-employee.component.scss',
+  providers: [MessageService]
 
 })
 export class AddNewEmployeeComponent implements OnInit {
@@ -24,11 +28,14 @@ export class AddNewEmployeeComponent implements OnInit {
   value: any;
   employeeForm: FormGroup | any;
   date1: Date | undefined;
-
+  message: any;
 
 
   constructor(private fb: FormBuilder,
-              private customService:CustomService) {
+              private customService:CustomService,
+              private messageService: MessageService,
+              private router: Router,
+              private ngxUiLoaderService: NgxUiLoaderService) {
 
   }
 
@@ -58,9 +65,10 @@ export class AddNewEmployeeComponent implements OnInit {
   }
 
   saveEmployee() {
-
-
     if (this.employeeForm.valid) {
+
+      this.ngxUiLoaderService.start();
+
       const formValue = this.employeeForm.value;
       console.log(formValue)
 
@@ -83,14 +91,18 @@ export class AddNewEmployeeComponent implements OnInit {
       this.customService.addNewEmployee(employee).subscribe({
         next: (response) => {
           console.log('Employee saved successfully', response);
+          this.router.navigate(['/dashboard']);
+          this.showSuccess()
           this.resetForm();
         },
         error: (error) => {
           console.error('Error saving employee', error);
-          // Handle error (e.g., show error message to user)
+          this.showError(error.error.message);
+          this.ngxUiLoaderService.stop();
         },
         complete: () => {
-          console.log('Employee save operation completed');
+          console.log('Employee saved completed ');
+          this.ngxUiLoaderService.stop();
         }
       });
     } else {
@@ -101,6 +113,15 @@ export class AddNewEmployeeComponent implements OnInit {
       });
      }
   }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Employee saved successfully' });
+  }
+
+  showError(message:string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
 
 
   resetForm() {

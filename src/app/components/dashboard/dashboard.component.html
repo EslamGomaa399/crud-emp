@@ -1,6 +1,3 @@
-
-
-
 <div class="emp-hover">
   <div class="m-3 pt-3">
     <p-button
@@ -44,11 +41,14 @@
                       [rounded]="true" severity="info"
                       [outlined]="true" />
 
+            <p-toast />
+            <p-confirmDialog />
             <p-button class="mx-1"
                       icon="pi pi-times"
                       [rounded]="true"
                       severity="danger"
-                      [outlined]="true" />
+                      [outlined]="true"
+                      (click)="deleteEmployee(employee.employeeId)"/>
           </td>
         </tr>
       </ng-template>

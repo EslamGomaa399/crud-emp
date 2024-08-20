@@ -48,7 +48,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private _customService: CustomService,
-              private _router: Router) {
+              private _router: Router,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService) {
 
   }
 
@@ -65,8 +67,6 @@ export class DashboardComponent implements OnInit {
     this.getAllEmployees();
 
   }
-
-
 
 
   onClickAddNewEmployee() {
@@ -87,6 +87,24 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+
+  deleteEmployee(id: number) {
+    this._customService.deleteEmployee(id).subscribe({
+      next: (data) => {
+        console.log("Employee deleted successfully.", data);
+        this.getAllEmployees();
+      },
+      error: (error) => {
+        console.log("Error occurred while deleting employee.")
+        console.log(error)
+      },
+      complete: () => {
+        console.log("Employee deleted successfully.");
+      }
+    })
+  }
+
 
 
 
