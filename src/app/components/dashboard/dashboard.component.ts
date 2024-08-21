@@ -91,19 +91,41 @@ export class DashboardComponent implements OnInit {
 
   deleteEmployee(id: number) {
     this._customService.deleteEmployee(id).subscribe({
-      next: (data) => {
-        console.log("Employee deleted successfully.", data);
-        this.getAllEmployees();
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Record deleted successfully' });
+        this.getAllEmployees(); // Refresh the employee list after deletion
       },
       error: (error) => {
-        console.log("Error occurred while deleting employee.")
-        console.log(error)
-      },
-      complete: () => {
-        console.log("Employee deleted successfully.");
+        console.error("Error occurred while deleting employee:", error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete record' });
       }
-    })
+    });
   }
+
+
+  confirmDelete(employee: Employee) {
+    if (employee.employeeId !== undefined) {
+      this.confirmationService.confirm({
+        message: 'Do you want to delete this record?',
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        acceptButtonStyleClass: "p-button-danger p-button-text",
+        rejectButtonStyleClass: "p-button-text p-button-text",
+        acceptIcon: "none",
+        rejectIcon: "none",
+        accept: () => {
+          this.deleteEmployee(employee.employeeId!); // `!` asserts that the value is not undefined
+        },
+        reject: () => {
+          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+        }
+      });
+    } else {
+      console.error("Employee ID is undefined. Cannot delete.");
+    }
+  }
+
+
 
 
 

@@ -1,59 +1,80 @@
-<div class="emp-hover">
-  <div class="m-3 pt-3">
-    <p-button
-      size="small"
-      label="Add New Employee"
-      [rounded]="true"
-      severity="help"
-      (click)="onClickAddNewEmployee()"
-      icon="pi pi-user-plus">
-    </p-button>
-  </div>
-  <div >
-    <p-table
-      [value]="employees"
-      [resizableColumns]="true"
-      styleClass="p-datatable-striped"
-      [tableStyle]="{'min-width': '50rem'}">
-      <ng-template pTemplate="header">
-        <tr>
-          <th pResizableColumn>Name</th>
-          <th pResizableColumn>Job</th>
-          <th pResizableColumn>Department</th>
-          <th pResizableColumn>Email</th>
-          <th pResizableColumn>Action</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-employee>
-        <tr>
-          <td>
-            <a style="text-decoration: none; font-weight: bold" class="p-card" routerLink="/employee-details" routerLinkActive="active">
-              {{employee.firstName}} {{employee.lastName}}
-            </a>
-          </td>
-          <td>{{employee.jobTitle}}</td>
-          <td>{{employee.departmentName}}</td>
-          <td>{{employee.email}}</td>
-          <td>
-            <p-button routerLink="/employee-details"
-                      class="mx-1"
-                      icon="pi pi-user-edit"
-                      [rounded]="true" severity="info"
-                      [outlined]="true" />
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+<div class="grid">
+  <div class="col-9">
+    <div class="emp-hover">
+      <div class="m-3 pt-3">
+        <p-button
+          size="small"
+          label="Add New Employee"
+          [rounded]="true"
+          severity="help"
+          (click)="onClickAddNewEmployee()"
+          icon="pi pi-user-plus">
+        </p-button>
+      </div>
+      <div>
+        <p-table
+          [value]="employees"
+          [resizableColumns]="true"
+          styleClass="p-datatable-striped"
+          [paginator]="true"
+          [rows]="5"
+          [rowsPerPageOptions]="[5, 10, 20]"
+          [tableStyle]="{'min-width': '50rem'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pResizableColumn>Name</th>
+              <th pResizableColumn>Department</th>
+              <th pResizableColumn>Phone Number</th>
+              <th pResizableColumn>Email</th>
+              <th pResizableColumn>Action</th>
+            </tr>
+          </ng-template>
 
-            <p-toast />
-            <p-confirmDialog />
-            <p-button class="mx-1"
-                      icon="pi pi-times"
-                      [rounded]="true"
-                      severity="danger"
-                      [outlined]="true"
-                      (click)="deleteEmployee(employee.employeeId)"/>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+          <ng-template pTemplate="body" let-employee>
+            <tr>
+              <td>
+                <div style="display: flex; align-items: center;">
+                  <p-avatar
+                    image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+                    styleClass="mr-2"
+                    size="normal"
+                    shape="circle"/>
+                  <div>
+                    <a style="text-decoration: none; font-weight: bold" class="p-card" routerLink="/employee-details" routerLinkActive="active">
+                      {{employee.firstName}} {{employee.lastName}}
+                    </a>
+                    <div style="font-size: 0.85rem; color: gray; margin-top: 12px;margin-left:4px">
+                      {{employee.jobTitle}}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>{{employee.departmentName}}</td>
+              <td>{{employee.hireDate}}</td>
+              <td>{{employee.email}}</td>
+              <td>
+                <p-button routerLink="/employee-details"
+                          class="mx-1"
+                          icon="pi pi-user-edit"
+                          [rounded]="true" severity="info"
+                          [outlined]="true" />
+
+                <p-button class="mx-1"
+                          icon="pi pi-times"
+                          [rounded]="true"
+                          severity="danger"
+                          [outlined]="true"
+                          (click)="confirmDelete(employee)"/>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <h3>Hello world</h3>
   </div>
 </div>
-
-
