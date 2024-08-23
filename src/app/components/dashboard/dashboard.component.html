@@ -2,7 +2,7 @@
 <p-confirmDialog></p-confirmDialog>
 <div class="grid">
   <div class="col-9">
-    <div class="emp-hover">
+    <div class="emp-shadow">
       <div class="m-3 pt-3">
         <p-button
           size="small"
@@ -26,7 +26,7 @@
             <tr>
               <th pResizableColumn>Name</th>
               <th pResizableColumn>Department</th>
-              <th pResizableColumn>Phone Number</th>
+              <th pResizableColumn>Job</th>
               <th pResizableColumn>Email</th>
               <th pResizableColumn>Action</th>
             </tr>
@@ -45,14 +45,12 @@
                     <a style="text-decoration: none; font-weight: bold" class="p-card" routerLink="/employee-details" routerLinkActive="active">
                       {{employee.firstName}} {{employee.lastName}}
                     </a>
-                    <div style="font-size: 0.85rem; color: gray; margin-top: 12px;margin-left:4px">
-                      {{employee.jobTitle}}
-                    </div>
+
                   </div>
                 </div>
               </td>
               <td>{{employee.departmentName}}</td>
-              <td>{{employee.hireDate}}</td>
+              <td>{{employee.jobTitle}}</td>
               <td>{{employee.email}}</td>
               <td>
                 <p-button routerLink="/employee-details"
@@ -78,3 +76,5 @@
     <h3>Hello world</h3>
   </div>
 </div>
+
+

@@ -28,19 +28,21 @@ import {DropdownModule} from "primeng/dropdown";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { LoaderComponent } from './shared/loader/loader.component';
 import {NgxUiLoaderConfig, NgxUiLoaderModule} from "ngx-ui-loader";
+import {AuthGuard} from "./guard/auth-guard";
 
-const routes:Routes = [
-  ({path: 'home', component:HomeComponent}),
-  {path: 'about', component:AboutComponent},
-  {path: 'contact', component:ContactComponent},
-  {path: 'dashboard',component:DashboardComponent},
-  {path: 'login', component:LoginComponent},
-  {path: 'add-new-employee', component:AddNewEmployeeComponent},
-  {path: 'employee-details', component:EmployeeDetailsComponent}
-]
+const routes: Routes = [
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
+  { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },  // Login route does not require authentication
+  { path: 'add-new-employee', component: AddNewEmployeeComponent, canActivate: [AuthGuard] },
+  { path: 'employee-details', component: EmployeeDetailsComponent, canActivate: [AuthGuard] }
+];
+
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig  = {
-  fgsColor: '#007bff', // Spinner color
+  fgsColor: '#7d2ae8', // Spinner color
   fgsType: 'ball-spin', // Spinner type
   fgsSize: 80, // Size of the spinner
   overlayColor: 'rgba(40, 40, 40, 0.8)', // Overlay color

@@ -4,25 +4,23 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins" , sans-serif;
+
 }
-body{
-  min-height: 100vh;
+.page-wrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: #7d2ae8;
-  padding: 30px;
+  align-items: center;
+  min-height: 100vh;
 }
-.container{
+.container {
   position: relative;
   max-width: 850px;
   width: 100%;
   background: #fff;
   padding: 40px 30px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
   perspective: 2700px;
-  margin: auto; /* Centering the container */
+
 }
 .container .cover{
   position: absolute;
@@ -61,7 +59,7 @@ body{
   z-index: 12;
 }
 .container .cover::after{
-  opacity: 0.3;
+
   transform: rotateY(180deg);
   backface-visibility: hidden;
 }
@@ -88,10 +86,13 @@ body{
   font-weight: 600;
   color: #fff;
   text-align: center;
+
 }
 .cover .text .text-2{
   font-size: 15px;
   font-weight: 500;
+  margin:10px;
+
 }
 .container .forms{
   height: 100%;
@@ -137,6 +138,7 @@ body{
   position: relative;
 }
 .form-content .input-box input{
+  font-family: "Poppins" , sans-serif;
   height: 100%;
   width: 100%;
   outline: none;
@@ -214,4 +216,15 @@ body{
   .container #flip:checked ~ .forms .login-form{
     display: none;
   }
+}
+.login-button{
+  color: #ffffff;
+  font-weight: bold;
+  background: #7d2ae8;
+  border: #7d2ae8;
+  border-radius:10px;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
 }

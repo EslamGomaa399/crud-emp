@@ -10,7 +10,7 @@ import {Employee} from "../models/employee";
 })
 export class CustomService {
 
-  private apiUrl = `${environment.apiUrl}`;
+  private apiUrl = `${environment.empUrl}`;
 
   constructor(private _httpClient: HttpClient) {
   }
