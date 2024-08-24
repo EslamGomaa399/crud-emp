@@ -6,6 +6,7 @@ import {AuthService} from "../services/auth.service";
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  isValid: boolean =false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -17,4 +18,21 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
+
+  validateToken(){
+    this.authService.validateToken().subscribe({
+      next:(res) => {
+        console.log(res);
+        this.isValid = res.isValid;
+      },
+      error:(err) => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("completed successfully <><> ")
+      }
+    });
+  }
+
+
 }

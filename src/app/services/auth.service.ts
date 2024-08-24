@@ -5,6 +5,7 @@ import {User} from "../models/user";
 import {Observable} from "rxjs";
 import {Employee} from "../models/employee";
 import {AuthResponse} from "../models/auth-response";
+import * as string_decoder from "node:string_decoder";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,14 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  validateToken(): Observable<any> {
+    const token = localStorage.getItem('token') || '';
+    return this._httpClient.get<any>(`${this.authUrl}/validate-token`, {
+      params: { token: token }
+    });
+  }
+
 
 
 }
