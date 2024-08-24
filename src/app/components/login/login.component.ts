@@ -44,34 +44,32 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-
     this.ngxUiLoaderService.start();
 
     const loginFormValue = this.loginForm.value;
     const user = {
-      username:loginFormValue.username,
-      password:loginFormValue.password
-    }
+      username: loginFormValue.username,
+      password: loginFormValue.password
+    };
 
     this.authService.login(user).subscribe({
-      next: (res)=> {
-        console.log(res);
+      next: (res) => {
         localStorage.setItem('token', res.accessToken);
+        this.showSuccess();
+        this.router.navigate(['/dashboard']).then(() => {
+          this.ngxUiLoaderService.stop();
+        });
       },
-      error: (error)=> {
-        console.log(error);
+      error: (error) => {
         this.ngxUiLoaderService.stop();
         this.showError();
       },
-      complete: ()=> {
-        console.log("Successfully logged in ... ")
-        this.ngxUiLoaderService.stop();
-        this.showSuccess();
-        this.router.navigate(['/dashboard'])
-
+      complete: () => {
+        this.authService.loggedIn = true;
       }
-    })
+    });
   }
+
 
 
   showSuccess() {

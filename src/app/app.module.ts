@@ -31,6 +31,7 @@ import {NgxUiLoaderConfig, NgxUiLoaderModule} from "ngx-ui-loader";
 import {AuthGuard} from "./guard/auth-guard";
 
 const routes: Routes = [
+  {path: '', component:HomeComponent,canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
