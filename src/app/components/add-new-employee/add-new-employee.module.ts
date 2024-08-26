@@ -11,24 +11,26 @@ import {CountryDropdownComponent} from "../../shared/country-dropdown/country-dr
 import {CalendarModule} from "primeng/calendar";
 import {ToastModule} from "primeng/toast";
 import {AppModule} from "../../app.module";
+import {StepperModule} from "primeng/stepper";
 
 
 @NgModule({
   declarations: [
     AddNewEmployeeComponent
   ],
-  imports: [
-    CommonModule,
-    AddNewEmployeeRoutingModule,
-    Button,
-    DropdownModule,
-    FormsModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    CountryDropdownComponent,
-    CalendarModule,
-    ToastModule,
-    AppModule
-  ]
+    imports: [
+        CommonModule,
+        AddNewEmployeeRoutingModule,
+        Button,
+        DropdownModule,
+        FormsModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        CountryDropdownComponent,
+        CalendarModule,
+        ToastModule,
+        AppModule,
+        StepperModule
+    ]
 })
 export class AddNewEmployeeModule { }

@@ -1,4 +1,4 @@
-
+<p-toast />
 <div class="page-container">
   <div class="p-card">
     <div class="header-container">
@@ -252,7 +252,6 @@
                   size="small" label="Reset"
                   (onClick)="resetForm()"
                   severity="warning"></p-button>
-        <p-toast />
         <p-button [disabled]="employeeForm.invalid"
                   class="mx-2" size="small" label="Save"
                   severity="success" type="submit">
@@ -264,5 +263,279 @@
 
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<p-toast />-->
+<!--<div class="page-container">-->
+<!--  <div class="p-card">-->
+<!--    <p-stepper [linear]="true">-->
+<!--      &lt;!&ndash; Step 1: Personal Details &ndash;&gt;-->
+<!--      <p-stepperPanel header="Personal Details">-->
+<!--        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">-->
+<!--          <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">-->
+<!--            <div class="grid">-->
+<!--              <div class="col-6">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="firstName">First Name</label>-->
+<!--                  <input-->
+<!--                    pInputText-->
+<!--                    id="firstName"-->
+<!--                    formControlName="firstName"-->
+<!--                    placeholder="Enter first name"-->
+<!--                    aria-describedby="firstName-help"/>-->
+<!--                  <small id="firstName-help" class="p-error" *ngIf="employeeForm.get('firstName').touched && employeeForm.get('firstName').hasError('required')">-->
+<!--                    * First name is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="lastName">Last Name</label>-->
+<!--                  <input-->
+<!--                    pInputText-->
+<!--                    id="lastName"-->
+<!--                    formControlName="lastName"-->
+<!--                    placeholder="Enter last name"-->
+<!--                    aria-describedby="lastName-help"/>-->
+<!--                  <small id="lastName-help" class="p-error" *ngIf="employeeForm.get('lastName').touched && employeeForm.get('lastName').errors?.['required']">-->
+<!--                    * Last name is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="grid">-->
+<!--              <div class="col">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="email">Email</label>-->
+<!--                  <input-->
+<!--                    pInputText-->
+<!--                    id="email"-->
+<!--                    formControlName="email"-->
+<!--                    placeholder="Enter email"-->
+<!--                    aria-describedby="email-help"/>-->
+<!--                  <small id="email-help1" class="p-error" *ngIf="employeeForm.get('email').touched && employeeForm.get('email').errors?.['required']">-->
+<!--                    * Email is required.-->
+<!--                  </small>-->
+<!--                  <small id="email-help2" class="p-error" *ngIf="employeeForm.get('email').touched && employeeForm.get('email').errors?.['email']">-->
+<!--                    * Email must be a valid email address.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Hire Date and Salary &ndash;&gt;-->
+<!--            <div class="grid">-->
+<!--              <div class="col-6">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="hireDate">Hire Date</label>-->
+<!--                  <p-calendar id="hireDate"-->
+<!--                              formControlName="hireDate"-->
+<!--                              dateFormat="yy-mm-dd"-->
+<!--                              placeholder="Select hire date">-->
+<!--                  </p-calendar>-->
+<!--                  <small id="hireDate-help" class="p-error" *ngIf="employeeForm.get('hireDate').touched && employeeForm.get('hireDate').errors?.['required']">-->
+<!--                    * Hire date is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="salary">Salary</label>-->
+<!--                  <input-->
+<!--                    pInputText-->
+<!--                    id="salary"-->
+<!--                    formControlName="salary"-->
+<!--                    placeholder="Enter salary"-->
+<!--                    type="number"-->
+<!--                    aria-describedby="salary-help"/>-->
+<!--                  <small id="salary-help" class="p-error" *ngIf="employeeForm.get('salary').touched && employeeForm.get('salary').errors?.['required']">-->
+<!--                    * Salary is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="flex pt-4 justify-content-end">-->
+<!--              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </ng-template>-->
+<!--      </p-stepperPanel>-->
+
+<!--      &lt;!&ndash; Step 2: Department, Job, and Manager Assignment &ndash;&gt;-->
+<!--      <p-stepperPanel header="Assignment">-->
+<!--        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">-->
+<!--          <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">-->
+<!--            <div class="grid">-->
+<!--              <div class="col-6">-->
+<!--                <div class="es-dropdown-dept flex flex-column gap-2">-->
+<!--                  <label for="departmentName">Department</label>-->
+<!--                  <p-dropdown-->
+<!--                    id="departmentName"-->
+<!--                    placeholder="Enter department"-->
+<!--                    formControlName="departmentName"-->
+<!--                    [options]="departmentOptions">-->
+<!--                  </p-dropdown>-->
+<!--                  <small id="department-help" class="p-error"-->
+<!--                         *ngIf="employeeForm.get('departmentName').touched && employeeForm.get('departmentName').errors?.['required']">-->
+<!--                    * Department is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <div class="es-dropdown-job flex flex-column gap-2">-->
+<!--                  <label for="job">Job Title</label>-->
+<!--                  <p-dropdown-->
+<!--                    id="job"-->
+<!--                    placeholder="Enter job title"-->
+<!--                    formControlName="jobTitle"-->
+<!--                    [options]="jobOptions">-->
+<!--                  </p-dropdown>-->
+<!--                  <small id="job-help" class="p-error"-->
+<!--                         *ngIf="employeeForm.get('jobTitle').touched && employeeForm.get('jobTitle').errors?.['required']">-->
+<!--                    * Job title is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="grid">-->
+<!--              <div class="col">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="managerName">Manager Name</label>-->
+<!--                  <p-dropdown id="managerName"-->
+<!--                              [options]="managersOptions"-->
+<!--                              formControlName="managerName"-->
+<!--                              placeholder="Select a Manager"/>-->
+<!--                  <small id="managerName-help" class="p-error" *ngIf="employeeForm.get('managerName').touched && employeeForm.get('managerName').errors?.['required']">-->
+<!--                    * Manager name is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="flex pt-4 justify-content-between">-->
+<!--              <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />-->
+<!--              <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" />-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </ng-template>-->
+<!--      </p-stepperPanel>-->
+
+<!--      &lt;!&ndash; Step 3: Address Information &ndash;&gt;-->
+<!--      <p-stepperPanel header="Address Information">-->
+<!--        <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">-->
+<!--          <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">-->
+<!--            <div class="grid">-->
+<!--              <div class="col-6">-->
+<!--                <div class="es-dropdown-dept flex flex-column gap-2">-->
+<!--                  <label for="countries">Country</label>-->
+<!--                  <p-dropdown-->
+<!--                    id="countries"-->
+<!--                    placeholder="Select a Country"-->
+<!--                    formControlName="country"-->
+<!--                    optionLabel="name"-->
+<!--                    [options]="countriesOptions"-->
+<!--                    (onChange)="onCountryChange($event.value)">-->
+<!--                  </p-dropdown>-->
+<!--                  <small id="country-help" class="p-error"-->
+<!--                         *ngIf="employeeForm.get('country').touched && employeeForm.get('country').errors?.['required']">-->
+<!--                    * Country is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <div class="es-dropdown-city flex flex-column gap-2">-->
+<!--                  <label for="city">City</label>-->
+<!--                  <p-dropdown-->
+<!--                    id="city"-->
+<!--                    placeholder="Select a City"-->
+<!--                    formControlName="city"-->
+<!--                    [options]="citiesOptions">-->
+<!--                  </p-dropdown>-->
+<!--                  <small id="city-help" class="p-error"-->
+<!--                         *ngIf="employeeForm.get('city').touched && employeeForm.get('city').errors?.['required']">-->
+<!--                    * City is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="grid">-->
+<!--              <div class="col">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="street">Street Address</label>-->
+<!--                  <input-->
+<!--                    pInputText-->
+<!--                    id="street"-->
+<!--                    formControlName="street"-->
+<!--                    placeholder="Enter street address"-->
+<!--                    aria-describedby="street-help"/>-->
+<!--                  <small id="street-help" class="p-error" *ngIf="employeeForm.get('street').touched && employeeForm.get('street').errors?.['required']">-->
+<!--                    * Street address is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="grid">-->
+<!--              <div class="col-6">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="postalCode">Postal Code</label>-->
+<!--                  <input-->
+<!--                    pInputText-->
+<!--                    id="postalCode"-->
+<!--                    formControlName="postalCode"-->
+<!--                    placeholder="Enter postal code"-->
+<!--                    aria-describedby="postalCode-help"/>-->
+<!--                  <small id="postalCode-help" class="p-error" *ngIf="employeeForm.get('postalCode').touched && employeeForm.get('postalCode').errors?.['required']">-->
+<!--                    * Postal code is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-6">-->
+<!--                <div class="flex flex-column gap-2">-->
+<!--                  <label for="phoneNumber">Phone Number</label>-->
+<!--                  <input-->
+<!--                    pInputText-->
+<!--                    id="phoneNumber"-->
+<!--                    formControlName="phoneNumber"-->
+<!--                    placeholder="Enter phone number"-->
+<!--                    aria-describedby="phoneNumber-help"/>-->
+<!--                  <small id="phoneNumber-help" class="p-error" *ngIf="employeeForm.get('phoneNumber').touched && employeeForm.get('phoneNumber').errors?.['required']">-->
+<!--                    * Phone number is required.-->
+<!--                  </small>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="flex pt-4 justify-content-between">-->
+<!--              <p-button label="Back" icon="pi pi-arrow-left" (onClick)="prevCallback.emit()" />-->
+<!--              <p-button label="Submit"-->
+<!--                        icon="pi pi-save"-->
+<!--                        iconPos="right"-->
+<!--                        type="submit"-->
+<!--                        severity="success"-->
+<!--                        [disabled]="!employeeForm.valid" />-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </ng-template>-->
+<!--      </p-stepperPanel>-->
+<!--    </p-stepper>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
 
 

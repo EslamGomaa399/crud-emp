@@ -16,10 +16,30 @@ body {
   height: 100%; /* Optional: Ensure the body takes up full height */
 
 }
-#job, #departmentName, #city, #countries,#managerName{
+#job, #departmentName, #city, #countries,#managerName,#hireDate{
   width: 100% !important;
 }
 .emp-shadow{
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+html {
+  font-size: 14px;
+}
+
+//body {
+//  font-family: var(--font-family);
+//  font-weight: normal;
+//  background: var(--surface-ground);
+//  color: var(--text-color);
+//  padding: 1rem;
+//  -webkit-font-smoothing: antialiased;
+//  -moz-osx-font-smoothing: grayscale;
+//}
+
+.card {
+  background: var(--surface-card);
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
 

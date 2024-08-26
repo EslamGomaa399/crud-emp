@@ -65,6 +65,7 @@ export class AddNewEmployeeComponent implements OnInit {
   }
 
   saveEmployee() {
+    debugger
     if (this.employeeForm.valid) {
 
       this.ngxUiLoaderService.start();
@@ -96,7 +97,8 @@ export class AddNewEmployeeComponent implements OnInit {
           this.resetForm();
         },
         error: (error) => {
-          console.error('Error saving employee', error);
+          debugger
+          console.log(error);
           this.showError(error.error.message);
           this.ngxUiLoaderService.stop();
         },
